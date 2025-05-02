@@ -64,6 +64,12 @@ Below are key AWS Console views illustrating the deployed infrastructure. Click 
 ### DynamoDB Table Items
 [![DynamoDB Table Items](./project/assets/dynamodb.png)](./project/assets/dynamodb.png)
 
+### SES email
+[![SES email](./project/assets/ses_email.png)](./project/assets/ses_email.png)
+
+### Email message notification
+[![Email message notification](./project/assets/email.png)](./project/assets/email.png)
+
 ---
 
 ## 🛠️ Getting Started
