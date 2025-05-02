@@ -1,31 +1,38 @@
-const BASE = import.meta.env.VITE_API_BASE; 
-// CRA: process.env.REACT_APP_API_BASE
 
-export async function deleteApplication(id) {
-  const res = await fetch(`${BASE}/applications/${id}`, {
-    method: "DELETE"
-  });
-  if (!res.ok) {
-    throw new Error(`Delete failed: ${res.status}`);
+const BASE_URL = import.meta.env.VITE_API_BASE;
+
+async function handleResponse(response) {
+  const contentType = response.headers.get('content-type');
+  let data;
+  if (contentType?.includes('application/json')) {
+    data = await response.json();
+  } else {
+    data = await response.text();
   }
+  if (!response.ok) {
+    const error = new Error(data?.message || data || `Error ${response.status}`);
+    error.status = response.status;
+    throw error;
+  }
+  return data;
 }
 
-export async function createApplication({ userId, amount, term }) {
-  const res = await fetch(`${BASE}/applications`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ userId, amount, term })
-  });
-  return res.json();
-}
+export const deleteApplication = async (id) =>
+  handleResponse(
+    await fetch(`${BASE_URL}/applications/${id}`, { method: 'DELETE' })
+  );
 
-export async function listApplications() {
-  const res = await fetch(`${BASE}/applications`);
-  return res.json();
-}
+export const createApplication = async (payload) =>
+  handleResponse(
+    await fetch(`${BASE_URL}/applications`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+  );
 
-export async function getApplication(id) {
-  const res = await fetch(`${BASE}/applications/${id}`);
-  if (res.status === 404) throw new Error("Not found");
-  return res.json();
-}
+export const listApplications = async () =>
+  handleResponse(await fetch(`${BASE_URL}/applications`));
+
+export const getApplication = async (id) =>
+  handleResponse(await fetch(`${BASE_URL}/applications/${id}`));

@@ -1,0 +1,63 @@
+/* description under the header */
+.form-description {
+    margin-top: 0.25rem;
+    margin-bottom: 1.5rem;
+    color: #555;
+    font-size: 0.95rem;
+  }
+  
+/* src/pages/CreateForm.css */
+
+/* 1) center the “card” and give it a white background */
+.create-form {
+    max-width: 400px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  /* 2) spacing between fields */
+  .create-form div {
+    margin-bottom: 1rem;
+  }
+  
+  /* 3) labels */
+  .create-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  /* 4) inputs */
+  .create-form input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* 5) grey “Create” button, centered just like .delete-button */
+  .create-button {
+    display: block;
+    margin: 1.5rem auto 0;
+    background: #718096;      /* slate-600 */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .create-button:hover {
+    background: #4a5568;      /* slate-700 */
+  }
+  
+  /* 6) error text */
+  .error-message {
+    margin-top: 1rem;
+    color: #e53e3e;           /* red-600 */
+    text-align: center;
+  }
+  

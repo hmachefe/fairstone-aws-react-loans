@@ -1,0 +1,46 @@
+/* src/pages/ListPage.css */
+
+/* description under the header */
+.detail-description {
+    margin-top: 0.25rem;
+    margin-bottom: 1.5rem;
+    color: #555;
+    font-size: 0.95rem;
+  }
+  
+
+/* description under the header */
+.list-description {
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+    color: #555;
+    font-size: 0.95rem;
+  }  
+
+.list-page {
+    background: #fff;
+    max-width: 800px;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .list-page h2 {
+    margin-bottom: 1rem;
+    color: #213547;
+  }
+  
+  .list-page ul {
+    list-style: disc inside;
+  }
+  
+  .list-page li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .error {
+    color: #e53e3e;
+    text-align: center;
+  }
+  
