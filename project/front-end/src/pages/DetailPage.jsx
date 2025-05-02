@@ -1,33 +1,50 @@
 // src/components/DetailPage.jsx
 import React, { useEffect, useState } from 'react';
-import { deleteApplication, getApplication } from '../api';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { getApplication, deleteApplication } from '../api';
 import './DetailPage.css';
 
 export default function DetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [app, setApp]     = useState(null);
-  const [error, setError] = useState(null);
+  const [application, setApplication] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  const onDelete = async () => {
-    if (!window.confirm('Really delete this application?')) return;
+  useEffect(() => {
+    getApplication(id)
+      .then(data => setApplication(data))
+      .catch(err => setErrorMessage(err.message));
+  }, [id]);
+
+  const handleDelete = async () => {
+    const confirmed = window.confirm('Really delete this application?');
+    if (!confirmed) return;
+
     try {
       await deleteApplication(id);
       navigate('/applications');
     } catch (err) {
-      setError(err.message);
+      setErrorMessage(err.message);
     }
   };
 
-  useEffect(() => {
-    getApplication(id)
-      .then(setApp)
-      .catch(err => setError(err.message));
-  }, [id]);
+  if (errorMessage) {
+    return (
+      <p className="status-message error">
+        Error: {errorMessage}
+      </p>
+    );
+  }
 
-  if (error) return <p className="status-message error">Error: {error}</p>;
-  if (!app)   return <p className="status-message loading">Loading…</p>;
+  if (!application) {
+    return (
+      <p className="status-message loading">
+        Loading…
+      </p>
+    );
+  }
+
+  const { applicationId, userId, amount, term, status } = application;
 
   return (
     <div className="detail-page-wrapper">
@@ -37,18 +54,25 @@ export default function DetailPage() {
         <button
           type="button"
           className="delete-button"
-          onClick={onDelete}
+          onClick={handleDelete}
         >
           Delete
         </button>
 
-        <h2>Application {app.applicationId}</h2>
+        <h2>Application {applicationId}</h2>
 
         <dl>
-          <dt>User ID</dt><dd>{app.userId}</dd>
-          <dt>Amount</dt><dd>{app.amount}</dd>
-          <dt>Term</dt><dd>{app.term} months</dd>
-          <dt>Status</dt><dd>{app.status}</dd>
+          <dt>User ID</dt>
+          <dd>{userId}</dd>
+
+          <dt>Amount</dt>
+          <dd>{amount}</dd>
+
+          <dt>Term</dt>
+          <dd>{term} months</dd>
+
+          <dt>Status</dt>
+          <dd>{status}</dd>
         </dl>
 
         <Link to="/applications" className="back-link">

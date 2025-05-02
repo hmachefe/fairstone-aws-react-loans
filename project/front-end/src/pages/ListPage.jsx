@@ -1,29 +1,58 @@
-import { useEffect, useState } from "react";
-import { listApplications } from "../api";
-import { Link } from "react-router-dom";
+// src/pages/ListPage.jsx
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { listApplications } from '../api';
 
-export default function ListPage() {
-  const [apps, setApps]   = useState([]);
-  const [error, setError] = useState();
+const ListPage = () => {
+  const [applications, setApplications] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     listApplications()
-      .then(setApps)
+      .then(data => setApplications(data))
       .catch(err => setError(err.message));
   }, []);
 
-  if (error) return <p>Error: {error}</p>;
-  if (!apps.length) return <p>No applications yet.</p>;
+  if (error) {
+    return (
+      <div className="error-state">
+        <p className="error-message">Error loading applications: {error}</p>
+      </div>
+    );
+  }
+
+  if (!applications.length) {
+    return (
+      <div className="empty-state">
+        <p>No applications found.</p>
+      </div>
+    );
+  }
 
   return (
-    <ul style={{ padding: "1rem" }}>
-      {apps.map(a => (
-        <li key={a.applicationId}>
-          <Link to={`/applications/${a.applicationId}`}>
-            {a.applicationId} – {a.status}
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <section
+      aria-labelledby="applications-heading"
+      className="applications-list"
+    >
+      <h1 id="applications-heading" className="visually-hidden">
+        Applications
+      </h1>
+      <ul className="list">
+        {applications.map(({ applicationId, status }) => (
+          <li key={applicationId} className="list-item">
+            <Link to={`/applications/${applicationId}`} className="list-link">
+              <span className="list-link-id">{applicationId}</span>
+              <span
+                className={`status status--${status.toLowerCase()}`}
+              >
+                {status}
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
-}
+};
+
+export default ListPage;
