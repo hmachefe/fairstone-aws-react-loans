@@ -1,6 +1,6 @@
 # FairStone Loans Application
 
-![Demo GIF](./assets/demo.gif)
+![Demo GIF](./project/assets/demo.gif)
 
 ## 📝 Overview
 
@@ -44,7 +44,7 @@ This architecture provides a fully managed, scalable solution without the need f
 
 ## 🎬 Demo
 
-![Application Demo](./assets/demo.gif)
+![Application Demo](./project/assets/demo.gif)
 
 ---
 
@@ -53,16 +53,16 @@ This architecture provides a fully managed, scalable solution without the need f
 Below are key AWS Console views illustrating the deployed infrastructure. Click each image to view full size:
 
 ### S3 Bucket Objects
-[![S3 Bucket Objects](./assets/s3.png)](./assets/s3.png)
+[![S3 Bucket Objects](./project/assets/s3.png)](./project/assets/s3.png)
 
 ### API Gateway Routes
-[![API Gateway Routes](./assets/api_gateway.png)](./assets/api_gateway.png)
+[![API Gateway Routes](./project/assets/api_gateway.png)](./project/assets/api_gateway.png)
 
 ### Lambda Functions
-[![Lambda Functions](./assets/lambdas.png)](./assets/lambdas.png)
+[![Lambda Functions](./project/assets/lambdas.png)](./project/assets/lambdas.png)
 
 ### DynamoDB Table Items
-[![DynamoDB Table Items](./assets/dynamodb.png)](./assets/dynamodb.png)
+[![DynamoDB Table Items](./project/assets/dynamodb.png)](./project/assets/dynamodb.png)
 
 ---
 
